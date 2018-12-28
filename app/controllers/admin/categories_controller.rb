@@ -1,14 +1,17 @@
-class Api::CategoriesController <ApplicationController
+class Admin::CategoriesController <ApplicationController
 
+def new
 
+end
   #create a new category
   def create
-    category = Category.new(create_params)
-    if item.save
-      render json: {status:"success" ,message:"category created", data: category },status: :ok
+    @categories = Category.new(create_params)
+    if @categories.save
+      render json: {status: 'SUCCESS', message: 'department created', data: @categories},status: :ok
     else
-      render json: {status:"failiure" ,message:"category can not be created", data: category.errors},status: :unprocessable_entity
+      render json: {status: 'SUCCESS', message: 'department created', data: @categories.errors},status: :ok
     end
+
   end
 
 
@@ -36,8 +39,8 @@ class Api::CategoriesController <ApplicationController
 
   #lists all the items
   def index
-    category = Category.order('created_at DESC')
-    render json: {status: 'SUCCESS', message: 'Loaded item',data: category},status: :ok
+    @categories = Category.order('created_at DESC')
+
   end
 
 

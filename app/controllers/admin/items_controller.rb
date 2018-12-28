@@ -1,18 +1,22 @@
-class Api::ItemsController < ApplicationController
+class Admin::ItemsController < ApplicationController
 
+def new
 
+end
   #create a new item
   def create
-    item = Item.new(create_params)
-    if item.save
-      render json: {status:"success" ,message:"item created", data: item },status: :ok
+    @items = Item.new(create_params)
+    if @items.save
+      render json: {status: 'SUCCESS', message: 'department created', data: @items},status: :ok
     else
-      render json: {status:"failiure" ,message:"item can not be created", data: item.errors},status: :unprocessable_entity
+      render json: {status: 'SUCCESS', message: 'department created', data: @items.errors},status: :ok
     end
   end
 
 
   #destroy the item
+      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
+      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
   def destroy
     item = Item.find(params[:id])
     if item.delete
@@ -35,8 +39,8 @@ class Api::ItemsController < ApplicationController
 
   #lists all the items
   def index
-    item = Item.order('created_at DESC');
-    render json: {status: 'SUCCESS', message: 'Loaded item',data: item},status: :ok
+    @items = Item.order('created_at DESC')
+
   end
 
 
