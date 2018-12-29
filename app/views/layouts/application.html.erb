@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FixedAssetManagementr</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+</head>
+<div class="sidenav">
+  <a href="http://localhost:3000/admin/departments/">Department</a>
+  <a href="http://localhost:3000/admin/categories/">Categories</a>
+  <a href="http://localhost:3000/admin/items/">Items</a>
+</div>
+
+
+<body>
+<%= yield %>
+</body>
+</html>

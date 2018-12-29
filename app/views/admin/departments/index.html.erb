@@ -1,0 +1,20 @@
+<div class="container">
+  <input type="text" id="name" onkeyup="name_filter()" placeholder="Search for names.." title="Type in a name">
+  <input type="text" id="description" onkeyup="description_filter()" placeholder="Search for  description.." title="Type in description">
+  <input type="text" id="status" onkeyup="status_filter()" placeholder="Search for status.." title="Type in a status">
+  <table class="table table-striped" id="Table">
+  <thead><th>Name</th><th>Description</th><th>Status</th></thead>
+ <% @department.each do |depart| %>
+  <tr>
+    <td><%= depart.name %></td>
+    <td><%= depart.description  %></td>
+
+    <td> <%= depart.status %>
+
+        </td>
+  </tr>
+    <%end %>
+  <tr></tr>
+
+</table>
+</div>
