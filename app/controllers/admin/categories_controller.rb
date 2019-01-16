@@ -1,4 +1,4 @@
-class Admin::CategoriesController <ApplicationController
+class Admin::CategoriesController <ApplicationController>
 
 def new
 
@@ -6,6 +6,7 @@ end
   #create a new category
   def create
     @categories = Category.new(create_params)
+    @categories.code
     if @categories.save
       render json: {status: 'SUCCESS', message: 'department created', data: @categories},status: :ok
     else

@@ -1,3 +1,4 @@
-<h2><%= @category.name %></h2>
-<h2><%= @category.description %></h2>
-<h2><%= @category.status %></h2>
+<div class="container">
+  <%= image_tag(url_for({:controller => 'items', :action => 'show', :format => 'pdf'}) ) %>
+
+</div>

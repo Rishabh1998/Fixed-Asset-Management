@@ -1,10 +1,12 @@
 class Admin::DepartmentsController < ApplicationController
+
   def new
 
   end
   #create new department
   def create
     @department = Department.new(create_params)
+    @department.code
     if @department.save
       render json: {status: 'SUCCESS', message: 'department created', data: @department},status: :ok
     else

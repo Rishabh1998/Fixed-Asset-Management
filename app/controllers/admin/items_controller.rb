@@ -1,11 +1,22 @@
 class Admin::ItemsController < ApplicationController
-
+  require 'barby'
+  require 'barby/barcode/gs1_128'
+  require 'barby/outputter/pdfwriter_outputter'
+  require 'barby/outputter/prawn_outputter'
+  require 'prawn-print'
+  #require 'barby/outputter/text_outputter'
 def new
+  respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
-end
   #create a new item
   def create
     @items = Item.new(create_params)
+    @items.code
+    @items.generate_code
     if @items.save
       render json: {status: 'SUCCESS', message: 'department created', data: @items},status: :ok
     else
@@ -14,9 +25,24 @@ end
   end
 
 
-  #destroy the item
-      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
-      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
+  def show
+
+     item = Item.find(params[:id]).item_code_final
+    @barcode = Barby::GS1128.new(item,'a','1')
+     @barcode_pdf= Barby::PrawnOutputter.new(@barcode)
+     doc =  @barcode_pdf.to_pdf
+     respond_to do |format|
+    format.html
+    format.json
+    format.pdf do
+      send_data( doc, type: "application/pdf" ,filename: 'barcode.pdf', disposition: :inline)
+    end
+     end
+   end
+
+
+
+
   def destroy
     item = Item.find(params[:id])
     if item.delete
@@ -25,6 +51,7 @@ end
       render json: {status: 'FAILED', message: 'item not deleted'},status: :ok
     end
   end
+
 
 
 #check if the item exists
@@ -47,6 +74,7 @@ end
   #updates the details of selected item
   def update
     item = Item.find(params[:id])
+
     if item.update(create_params)
       render json: {status:"success" ,message:"updated"},status: :ok
     else
@@ -55,9 +83,35 @@ end
   end
 
 
+  def location
+    item = Item.find(params[:id])
+    old_location = item.current_location
+    item.current_location = params.require(:current_location)
+
+      if item.changed?
+        location_detail = LocationDetail.new(:item_id => item.id ,:location_history => old_location)
+        if location_detail.save
+          if item.update(params.require(:item).permit(:current_location))
+            render json: {status: "success", message: "location and item updated"},status: :ok
+          else
+            render json: {status: "success", message: "location updated"},status: :ok
+          end
+        else
+          render json: {status: "failure", message: "not updated"},status: :ok
+        end
+        end
+
+
+
+
+
+    end
+
+
   private
   def create_params
-    params.require(:item).permit(:department_id, :category_id, :name, :status, :description)
+    params.require(:item).permit(:department_id, :category_id, :name, :status, :description, :current_location)
 
   end
-end
+  end
+

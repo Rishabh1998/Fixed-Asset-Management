@@ -3,9 +3,10 @@
   <input type="text" id="name" onkeyup="name_filter()" placeholder="Search for names.." title="Type in a name">
   <input type="text" id="description" onkeyup="description_filter()" placeholder="Search for  description.." title="Type in description">
   <input type="text" id="status" onkeyup="status_filter()" placeholder="Search for status.." title="Type in a status">
+  <input type="text" id="current_location" onkeyup="location_filter()" placeholder="Search for location.." title="Type in a location">
 
 <table class="table table-striped" id="Table">
-  <thead><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th><th>Category Name</th></thead>
+  <thead><th>Name</th><th>Description</th><th>Status</th><th>Current location</th><th>Department Name</th><th>Category Name</th></thead>
 
  <% @items.each do |item| %>
   <tr>
@@ -13,11 +14,18 @@
     <td><%= item.name %></td>
     <td><%= item.description  %></td>
     <td><%= item.status %></td>
+    <td><%= item.current_location %></td>
     <td><%= Department.find_by(:id => item.department_id).name %></td>
     <td><%= Category.find_by(:id => item.category_id).name %></td>
+
+
+#we are passing items.id as we want to search using id in the link
+     <td><%= link_to "print barcode", controller: "items", action:"show", id: item.id, :format => :pdf %></td>
+
   </tr>
-    <%end %>
-  <tr></tr>
+<%end %>
+
+<tr></tr>
 
 </table>
 </div>

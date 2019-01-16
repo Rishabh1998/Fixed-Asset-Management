@@ -15,3 +15,12 @@
 //= require turbolinks
 //= require_tree .
 //= require filter.js
+
+
+//= require turbolinks
+
+//= require bootstrap
+
+//= require_tree.
+//= require new.js.erb
+//= require popper
