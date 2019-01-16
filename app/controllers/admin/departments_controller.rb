@@ -1,18 +1,16 @@
 class Admin::DepartmentsController < ApplicationController
   def new
-
+    @department = Department.new
   end
   #create new department
   def create
     @department = Department.new(create_params)
+    @department.code
     if @department.save
       render json: {status: 'SUCCESS', message: 'department created', data: @department},status: :ok
     else
       render json: {status: 'SUCCESS', message: 'department created', data: @department.errors},status: :ok
-
     end
-
-
   end
 
   #destroys selected  department
@@ -25,9 +23,9 @@ class Admin::DepartmentsController < ApplicationController
     end
   end
 
-def show
-  @department_show = Department.find(params[:id])
-end
+  def show
+    @department_show = Department.find(params[:id])
+  end
 
   #updates the details of selected department
   def update

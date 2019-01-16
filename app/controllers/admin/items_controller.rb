@@ -1,4 +1,7 @@
 class Admin::ItemsController < ApplicationController
+  require 'barby'
+  require 'barby/barcode/gs1_128'
+  require 'barby/outputter/png_outputter'
 
 def new
 
@@ -6,6 +9,8 @@ end
   #create a new item
   def create
     @items = Item.new(create_params)
+    @items.code
+    @items.generate_code
     if @items.save
       render json: {status: 'SUCCESS', message: 'department created', data: @items},status: :ok
     else
@@ -14,9 +19,29 @@ end
   end
 
 
-  #destroy the item
-      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
-      render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
+  def show
+    item = Item.find(params[:id]).item_code_final
+  @barcode = Barby::GS1128.new(item,'a','0')
+  @barcode_png = Barby::PngOutputter.new(@barcode).to_png
+  respond_to do |format|
+    format.html
+    format.png do
+     send_data @barcode_png, type: "image/png", disposition: "inline"
+    end
+   #format.png do
+    #send_data @text_png, type: "image/png", disposition: "inline"
+ # end
+
+end
+  end
+
+  def location
+    item = Item.find(params[:id])
+    item.name = params.require(:name)
+    value = item.changed?
+    render json: {status:"showing data", data:value }
+  end
+
   def destroy
     item = Item.find(params[:id])
     if item.delete
@@ -25,7 +50,6 @@ end
       render json: {status: 'FAILED', message: 'item not deleted'},status: :ok
     end
   end
-
 
 #check if the item exists
   def existing_item

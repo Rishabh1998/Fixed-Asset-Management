@@ -6,6 +6,9 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :description
       t.integer :status
+      t.integer :item_code
+      t.string :item_code_final
+
 
       t.timestamps
     end
