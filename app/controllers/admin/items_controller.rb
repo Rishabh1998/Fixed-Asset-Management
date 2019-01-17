@@ -67,7 +67,19 @@ end
 
   end
 
+  def edit
+    @items = Item.find(params[:id])
+  end
+  def update
+    @items = Item.find(params[:id])
 
+    if @items.update_attributes(create_params)
+      redirect_to :action => 'show', :id => @items
+    else
+      @subjects = Subject.all
+      render :action => 'edit'
+    end
+  end
   #updates the details of selected item
   def update
     item = Item.find(params[:id])

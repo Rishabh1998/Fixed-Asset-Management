@@ -4,15 +4,16 @@
   <input type="text" id="status" onkeyup="status_filter()" placeholder="Search for status.." title="Type in a status">
   <table class="table table-striped" id="Table">
   <thead><th>Name</th><th>Description</th><th>Status</th></thead>
+
+    <%= link_to "Create Department", new_admin_department_path, remote: true %>
+
  <% @department.each do |depart| %>
   <tr>
     <td><%= depart.name %></td>
     <td><%= depart.description  %></td>
 
-    <td> <%= depart.status %>
-
-        </td>
-  </tr>
+    <td> <%= depart.status %></td>
+    <td><%= link_to "edit" ,controller: "departments" , action:"edit" , id:depart.id %></td>  </tr>
     <%end %>
   <tr></tr>
 

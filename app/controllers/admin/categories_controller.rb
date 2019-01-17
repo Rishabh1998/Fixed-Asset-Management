@@ -27,7 +27,9 @@ end
     end
   end
 
-
+def show
+  @categories = Category.find(params[:id])
+end
   #check if the item exists
   def existing_category
     category = Category.find_by(name: params[:name])
@@ -44,16 +46,31 @@ end
 
   end
 
+def edit
+  @categories = Category.find(params[:id])
+end
+def update
+  @categories = Category.find(params[:id])
+
+  if @categories.update_attributes(create_params)
+    redirect_to :action => 'show', :id => @categories
+  else
+    @subjects = Subject.all
+    render :action => 'edit'
+  end
+  end
+
+
 
   #updates the details of selected item
-  def update
-    category = Category.find(params[:id])
-    if category.update(create_params)
-      render json: {status:"success" ,message:"updated"},status: :ok
-    else
-      render json: {status:"failiure" ,message:"not updated"},status: :ok
-    end
-  end
+  #def update
+    #@categories  = Category.find(params[:id])
+    #if @categories.update(create_params)
+      #render json: {status:"success" ,message:"updated"},status: :ok
+   # else
+      #render json: {status:"failiure" ,message:"not updated"},status: :ok
+   # end
+  #end
 
 
   private
@@ -61,4 +78,5 @@ end
     params.require(:category).permit(:department_id, :name, :status, :description)
 
   end
-end
+  end
+

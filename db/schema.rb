@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_082428) do
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "category_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_categories_on_department_id"
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_082428) do
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "department_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,6 +38,8 @@ ActiveRecord::Schema.define(version: 2018_12_27_082428) do
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "item_code"
+    t.string "item_code_final"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_items_on_category_id"

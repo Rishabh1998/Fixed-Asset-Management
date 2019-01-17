@@ -1,6 +1,6 @@
 class Admin::DepartmentsController < ApplicationController
   def new
-    @department = Department.new
+    @department= Department.new
   end
   #create new department
   def create
@@ -24,18 +24,34 @@ class Admin::DepartmentsController < ApplicationController
   end
 
   def show
-    @department_show = Department.find(params[:id])
+    @department= Department.find(params[:id])
   end
 
-  #updates the details of selected department
+  def edit
+    @department = Department.find(params[:id])
+  end
   def update
-    department = Department.find(params[:id])
-    if department.update(create_params)
-      render json: {status:"success" ,message:"updated"},status: :ok
+    @department = Department.find(params[:id])
+
+    if @department.update_attributes(create_params)
+      redirect_to :action => 'show', :id => @department
     else
-      render json: {status:"failiure" ,message:"not updated"},status: :ok
+      @subjects = Subject.all
+      render :action => 'edit'
     end
   end
+
+
+
+  #updates the details of selected department
+  #def update
+   # @department = Department.find(params[:id])
+    #if @department.update(create_params)
+     # render json: {status:"success" ,message:"updated"},status: :ok
+    #else
+     # render json: {status:"failiure" ,message:"not updated"},status: :ok
+   #end
+  #end
 
 #lists all the department
   def index
@@ -46,7 +62,8 @@ class Admin::DepartmentsController < ApplicationController
  def filter
    @filter = Department.where(create_params).pluck.all?
     redirect_to
-end
+ end
+
   private
   def create_params
     params.require(:department).permit(:name, :description, :status)

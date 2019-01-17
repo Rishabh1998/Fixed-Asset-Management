@@ -7,6 +7,9 @@
 
   <table class="table table-striped" id="Table">
     <thead><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th></thead>
+
+    <%= link_to "Create Category", new_admin_category_path, remote: true %>
+
  <% @categories.each do |category| %>
   <tr>
 
@@ -15,9 +18,15 @@
     <td><%= category.status %></td>
     <td><%= Department.find_by(:id => category.department_id).name %></td>
   </tr>
-    <%end %>
+
+
+      <td><%= link_to "edit" ,controller: "categories" , action:"edit" , id:category.id %></td>
+
+
+  <%end %>
   <tr></tr>
 
-</table>
+
+  </table>
 </div>
 
