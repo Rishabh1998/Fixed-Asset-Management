@@ -14,7 +14,7 @@ end
     if @items.save
       render json: {status: 'SUCCESS', message: 'department created', data: @items},status: :ok
     else
-      render json: {status: 'SUCCESS', message: 'department created', data: @items.errors},status: :ok
+      render json: {status: 'FAILURE', message: 'department created', data: @items.errors},status: :ok
     end
   end
 
@@ -47,7 +47,7 @@ end
     if item.delete
       render json: {status: 'SUCCESS', message: 'item deleted'},status: :ok
     else
-      render json: {status: 'FAILED', message: 'item not deleted'},status: :ok
+      render json: {status: 'FAILURE', message: 'item not deleted'},status: :ok
     end
   end
 
@@ -57,7 +57,7 @@ end
     if item.present?
       render json: {status: 'SUCCESS', message: 'item already exists',data: item},status: :ok
     else
-      render json: {status: 'SUCCESS', message: 'item does not exists'},status: :ok
+      render json: {status: 'FAILURE', message: 'item does not exists'},status: :ok
     end
   end
 
@@ -72,9 +72,9 @@ end
   def update
     item = Item.find(params[:id])
     if item.update(create_params)
-      render json: {status:"success" ,message:"updated"},status: :ok
+      render json: {status:"SUCCESS" ,message:"updated"},status: :ok
     else
-      render json: {status:"failiure" ,message:"not updated"},status: :ok
+      render json: {status:"FAILURE" ,message:"not updated"},status: :ok
     end
   end
 

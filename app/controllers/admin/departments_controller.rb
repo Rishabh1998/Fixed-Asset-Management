@@ -9,7 +9,7 @@ class Admin::DepartmentsController < ApplicationController
     if @department.save
       render json: {status: 'SUCCESS', message: 'department created', data: @department},status: :ok
     else
-      render json: {status: 'SUCCESS', message: 'department created', data: @department.errors},status: :ok
+      render json: {status: 'FAILURE', message: 'department created', data: @department.errors},status: :ok
     end
   end
 
@@ -19,7 +19,7 @@ class Admin::DepartmentsController < ApplicationController
     if department.delete
       render json: {status: 'SUCCESS', message: 'department deleted'},status: :ok
     else
-      render json: {status: 'FAILED', message: 'department not deleted'},status: :ok
+      render json: {status: 'FAILURE', message: 'department not deleted'},status: :ok
     end
   end
 
@@ -31,9 +31,9 @@ class Admin::DepartmentsController < ApplicationController
   def update
     department = Department.find(params[:id])
     if department.update(create_params)
-      render json: {status:"success" ,message:"updated"},status: :ok
+      render json: {status:"SUCCESS" ,message:"updated"},status: :ok
     else
-      render json: {status:"failiure" ,message:"not updated"},status: :ok
+      render json: {status:"FAILURE" ,message:"not updated"},status: :ok
     end
   end
 
