@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       collection do
         get :existing_item
         put :location
+        get :barcode
       end
     end
 

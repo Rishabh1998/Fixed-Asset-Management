@@ -7,7 +7,11 @@
     <tr>
       <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
       <td><input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description"></td>
-      <td><input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status"></td>
+      <td><select id="status" onchange="filter()" name="status">
+        <option value="">Select Status</option>
+        <option value="active">Active</option>
+        <option value="disabled">Not Active</option>
+      </select></td>
     </tr>
   </table>
 

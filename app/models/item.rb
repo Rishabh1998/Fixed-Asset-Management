@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :department
   has_many :location_detail, dependent: :destroy
-  enum status: [:not_active,:active]
+  enum status: [:Disabled,:Active]
   def code
     last_code = Item.maximum(:item_code)
     self.item_code = last_code.to_i + 1

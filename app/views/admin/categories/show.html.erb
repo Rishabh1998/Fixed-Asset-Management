@@ -1,3 +1,19 @@
-<h2><%= @categories.name %></h2>
-<h2><%= @categories.description %></h2>
-<h2><%= @categories.status %></h2>
+
+<div class="container">
+  <div class="alert alert-success">
+    <strong>Status:</strong> Success
+  </div>
+  <div class="alert alert-info">
+    <strong>Message: </strong> Category created
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">Data: </div>
+    <div class="panel-body">
+      id: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%=@category.id %><br>
+      name: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= @category.name %><br>
+      description: &nbsp &nbsp <%= @category.description %><br>
+      status: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%= @category.status %><br>
+      Under Department_name: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= Department.find_by(:id => @category.department_id).name %><br>
+    </div>
+  </div>
+</div>

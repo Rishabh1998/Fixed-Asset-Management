@@ -1,3 +1,21 @@
+
 <div class="container">
-  <%= image_tag(url_for({:controller => 'items', :action => 'show', :format => 'png' }) ) %>
+  <div class="alert alert-success">
+    <strong>Status:</strong> Success
+  </div>
+  <div class="alert alert-info">
+    <strong>Message: </strong> Category created
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">Data: </div>
+    <div class="panel-body">
+      id: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%=@item.id %><br>
+      name: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= @item.name %><br>
+      description: &nbsp &nbsp <%= @item.description %><br>
+      status: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%= @item.status %><br>
+      Under Department: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= Department.find_by(:id => @item.department_id).name %><br>
+      Under Category: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= Category.find_by(:id => @item.category_id).name %><br>
+      Current Location: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= @item.current_location %><br>
+    </div>
+  </div>
 </div>

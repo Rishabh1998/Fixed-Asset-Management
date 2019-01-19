@@ -13,18 +13,21 @@ def new
 
   #create a new item
   def create
-    @items = Item.new(create_params)
-    @items.code
-    @items.generate_code
-    if @items.save
-      render json: {status: 'SUCCESS', message: 'department created', data: @items},status: :ok
+    @item = Item.new(create_params)
+    @item.code
+    @item.generate_code
+    if @item.save
+      redirect_to action: "show", id: @item.id
     else
       render json: {status: 'FAILURE', message: 'department created', data: @items.errors},status: :ok
     end
   end
 
-
   def show
+    @item = Item.find(params[:id])
+  end
+
+  def barcode
     item = Item.find(params[:id]).item_code_final
     @barcode = Barby::GS1128.new(item,'a','1')
     @barcode_pdf= Barby::PrawnOutputter.new(@barcode)
@@ -70,7 +73,7 @@ def new
     @items = Item.find(params[:id])
 
     if @items.update_attributes(create_params)
-      redirect_to :action => 'show', :id => @items
+      redirect_to action: "index"
     else
       @subjects = Subject.all
       render :action => 'edit'

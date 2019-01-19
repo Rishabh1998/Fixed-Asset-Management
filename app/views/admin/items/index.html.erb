@@ -5,7 +5,11 @@
   <br><br>
   <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name">
   <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description">
-  <input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status">
+  <td><select id="status" onchange="filter()" name="status">
+  <option value="">Select Status</option>
+  <option value="active">Active</option>
+  <option value="disabled">Not Active</option>
+</select></td>
 
 <table class="table table-bordered" id="Table">
   <thead><th>S.no.</th><th>Name</th><th>Description</th><th>Status</th><th>Current location</th><th>Department Name</th><th>Category Name</th></thead>
@@ -19,7 +23,7 @@
     <td><%= item.current_location %></td>
     <td><%= Department.find_by(:id => item.department_id).name %></td>
     <td><%= Category.find_by(:id => item.category_id).name %></td>
-    <td><%= link_to "Print Barcode", controller: "items", action:"show", id: item.id, :format => :pdf %></td>
+    <td><%= link_to "Print Barcode", controller: "items", action:"barcode", id: item.id, :format => :pdf %></td>
     <td><%= link_to "Edit Items" ,controller: "items" , action:"edit" , id:item.id, remote:true %></td>
   </tr>
 

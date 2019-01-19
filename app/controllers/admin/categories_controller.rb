@@ -5,10 +5,10 @@ def new
 end
   #create a new category
   def create
-    @categories = Category.new(create_params)
-    @categories.code
-    if @categories.save
-      render json: {status: 'SUCCESS', message: 'department created', data: @categories},status: :ok
+    @category = Category.new(create_params)
+    @category.code
+    if @category.save
+      redirect_to action: "show", id: @category.id
     else
       render json: {status: 'FAILURE', message: 'department created', data: @categories.errors},status: :ok
     end
@@ -28,7 +28,7 @@ end
   end
 
 def show
-  @categories = Category.find(params[:id])
+  @category = Category.find(params[:id])
 end
   #check if the item exists
   def existing_category
@@ -43,23 +43,19 @@ end
   #lists all the items
   def index
     @categories = Category.all
-
   end
 
 def edit
   @categories = Category.find(params[:id])
 end
-def update
-  @categories = Category.find(params[:id])
 
   def update
     category = Category.find(params[:id])
     if category.update(create_params)
-      render json: {status:"SUCCESS" ,message:"updated"},status: :ok
+      redirect_to action: "index"
     else
       render json: {status:"FAILURE" ,message:"not updated"},status: :ok
     end
-  end
   end
 
   private

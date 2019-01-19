@@ -11,10 +11,11 @@ function filter() {
     table = document.getElementById("Table");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
-        td_n = tr[i].getElementsByTagName("td")[0];
-        td_d = tr[i].getElementsByTagName("td")[1];
-        td_s = tr[i].getElementsByTagName("td")[2];
+        td_n = tr[i].getElementsByTagName("td")[1];
+        td_d = tr[i].getElementsByTagName("td")[2];
+        td_s = tr[i].getElementsByTagName("td")[3];
         if (td_n) {
+
             nameValue = td_n.textContent || td_n.innerText;
             descriptionValue = td_d.textContent || td_d.innerText;
             statusValue = td_s.textContent || td_s.innerText;
