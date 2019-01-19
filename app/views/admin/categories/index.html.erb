@@ -1,8 +1,8 @@
 <div class="container">
 
   <div class="page-header"><h1>Categories Information</h1></div>
-  <%= link_to "Create Category", new_admin_category_path, remote: true %>
-
+  <%= link_to "Create New Category", new_admin_category_path,class: "btn btn-default", remote: true %>
+<br><br>
   <table>
     <tr>
       <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
@@ -12,21 +12,20 @@
   </table>
 
 
-  <table class="table table-striped" id="Table">
-    <thead><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th></thead>
-
+  <table class="table table-bordered" id="Table">
+    <thead><th>S.No.</th><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th></thead>
 
  <% @categories.each do |category| %>
   <tr>
+    <td><%= category.id %></td>
     <td><%= category.name %></td>
     <td><%= category.description  %></td>
     <td><%= category.status %></td>
     <td><%= Department.find_by(:id => category.department_id).name %></td>
+    <td><%= link_to "Edit Category" ,controller: "categories" , action:"edit" , id:category.id, remote:true %></td>
   </tr>
-    <%end %>
+  <%end %>
   <tr></tr>
-
-
 </table>
 </div>
 

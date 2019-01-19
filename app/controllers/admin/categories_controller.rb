@@ -27,7 +27,9 @@ end
     end
   end
 
-
+def show
+  @categories = Category.find(params[:id])
+end
   #check if the item exists
   def existing_category
     category = Category.find_by(name: params[:name])
@@ -40,12 +42,16 @@ end
 
   #lists all the items
   def index
-    @categories = Category.order('created_at DESC')
+    @categories = Category.all
 
   end
 
+def edit
+  @categories = Category.find(params[:id])
+end
+def update
+  @categories = Category.find(params[:id])
 
-  #updates the details of selected item
   def update
     category = Category.find(params[:id])
     if category.update(create_params)
@@ -54,11 +60,12 @@ end
       render json: {status:"FAILURE" ,message:"not updated"},status: :ok
     end
   end
-
+  end
 
   private
   def create_params
     params.require(:category).permit(:department_id, :name, :status, :description)
 
   end
-end
+  end
+

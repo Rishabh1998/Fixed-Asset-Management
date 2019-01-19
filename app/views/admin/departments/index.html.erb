@@ -1,9 +1,8 @@
 <div class="container">
 
   <div class="page-header"><h1>Department Information</h1></div>
- <tr><%= link_to "Create Department", new_admin_department_path, remote: true %></tr>
-
-
+ <%= link_to "Create New Department", new_admin_department_path,class: "btn btn-default", remote: true %>
+  <br><br>
   <table>
     <tr>
       <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
@@ -18,9 +17,8 @@
   <thead><th>S.No.</th><th>Name</th><th>Description</th><th>Status</th></thead>
 
 
-
-
   <% @department.each do |depart| %>
+
   <tr>
     <td><%= depart.id %></td>
     <td><%= depart.name %></td>
@@ -29,7 +27,6 @@
     <td> <%= depart.status %></td>
     <td> <%= link_to "Edit Department", edit_admin_department_path(depart.id), remote: true %></td>
   </tr>
-
     <%end %>
 
 

@@ -59,22 +59,23 @@ def new
 
   #lists all the items
   def index
-    @items = Item.order('created_at DESC')
+    @items = Item.all
 
   end
 
-
-  #updates the details of selected item
+  def edit
+    @items = Item.find(params[:id])
+  end
   def update
-    item = Item.find(params[:id])
+    @items = Item.find(params[:id])
 
-    if item.update(create_params)
-      render json: {status:"SUCCESS" ,message:"updated"},status: :ok
+    if @items.update_attributes(create_params)
+      redirect_to :action => 'show', :id => @items
     else
-      render json: {status:"FAILURE" ,message:"not updated"},status: :ok
+      @subjects = Subject.all
+      render :action => 'edit'
     end
   end
-
 
   def location
     item = Item.find(params[:id])
