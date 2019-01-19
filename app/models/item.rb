@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :category
   belongs_to :department
+  has_many :location_detail, dependent: :destroy
   enum status: [:not_active,:active]
   def code
     last_code = Item.maximum(:item_code)
@@ -37,3 +38,4 @@ class Item < ApplicationRecord
     self.item_code_final=code
   end
 end
+

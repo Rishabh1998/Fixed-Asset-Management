@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_082428) do
+ActiveRecord::Schema.define(version: 2019_01_05_090106) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "department_id"
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "category_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_categories_on_department_id"
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_082428) do
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "department_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,13 +38,26 @@ ActiveRecord::Schema.define(version: 2018_12_27_082428) do
     t.string "name"
     t.string "description"
     t.integer "status"
+    t.integer "item_code"
+    t.string "item_code_final"
+    t.string "current_location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["department_id"], name: "index_items_on_department_id"
   end
 
+  create_table "location_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.string "location_history"
+    t.string "reason_to_change_position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_location_details_on_item_id"
+  end
+
   add_foreign_key "categories", "departments"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "departments"
+  add_foreign_key "location_details", "items"
 end

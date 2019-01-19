@@ -1,19 +1,37 @@
 <div class="container">
-  <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name">
-  <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description">
-  <input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status">
-  <table class="table table-striped" id="Table">
-  <thead><th>Name</th><th>Description</th><th>Status</th></thead>
- <% @department.each do |depart| %>
+
+  <div class="page-header"><h1>Department Information</h1></div>
+ <tr><%= link_to "Create Department", new_admin_department_path, remote: true %></tr>
+
+
+  <table>
+    <tr>
+      <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
+      <td><input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description"></td>
+      <td><input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status"></td>
+      </tr>
+  </table>
+
+
+
+  <table class="table table-bordered" id="Table">
+  <thead><th>S.No.</th><th>Name</th><th>Description</th><th>Status</th></thead>
+
+
+
+
+  <% @department.each do |depart| %>
   <tr>
+    <td><%= depart.id %></td>
     <td><%= depart.name %></td>
     <td><%= depart.description  %></td>
 
     <td> <%= depart.status %></td>
     <td> <%= link_to "Edit Department", edit_admin_department_path(depart.id), remote: true %></td>
   </tr>
+
     <%end %>
-  <tr></tr>
+
 
 </table>
 </div>

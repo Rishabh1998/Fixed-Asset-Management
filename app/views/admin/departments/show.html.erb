@@ -1,3 +1,18 @@
-<h2><%= @department.name %></h2>
-<h2><%= @department.description %></h2>
-<h2><%= @department.status %></h2>
+
+<div class="container">
+  <div class="alert alert-success">
+    <strong>Status:</strong> Success
+  </div>
+  <div class="alert alert-info">
+    <strong>Message: </strong> Department created
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">Data: </div>
+    <div class="panel-body">
+      id: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%=@department_show.id %><br>
+      name: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= @department_show.name %><br>
+      description: &nbsp &nbsp <%= @department_show.description %><br>
+      status: &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<%= @department_show.status %><br>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,14 @@
 <div class="container">
 
+  <div class="page-header"><h1>Items Information</h1></div>
+  <%= link_to "Create Item", new_admin_item_path, remote: true %>
+
   <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name">
   <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description">
   <input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status">
 
 <table class="table table-striped" id="Table">
-  <thead><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th><th>Category Name</th></thead>
+  <thead><th>Name</th><th>Description</th><th>Status</th><th>Current location</th><th>Department Name</th><th>Category Name</th></thead>
 
  <% @items.each do |item| %>
   <tr>
@@ -13,13 +16,13 @@
     <td><%= item.name %></td>
     <td><%= item.description  %></td>
     <td><%= item.status %></td>
+    <td><%= item.current_location %></td>
     <td><%= Department.find_by(:id => item.department_id).name %></td>
     <td><%= Category.find_by(:id => item.category_id).name %></td>
-    <td><%= link_to "barcode" ,controller: "items" , action:"show" , id:item.id %></td>
+    <td><%= link_to "print barcode", controller: "items", action:"show", id: item.id, :format => :pdf %></td>
   </tr>
 
-    <%end %>
-  <tr></tr>
+<%end %>
 
 </table>
 </div>

@@ -1,4 +1,5 @@
 class Admin::DepartmentsController < ApplicationController
+
   def new
     @department = Department.new
   end
@@ -7,10 +8,11 @@ class Admin::DepartmentsController < ApplicationController
     @department = Department.new(create_params)
     @department.code
     if @department.save
-      render json: {status: 'SUCCESS', message: 'department created', data: @department},status: :ok
+      redirect_to action: "show", id: @department.id
     else
-      render json: {status: 'FAILURE', message: 'department created', data: @department.errors},status: :ok
+      render json: {status: 'FAILURE', message: 'department not created', data: @department.errors},status: :ok
     end
+
   end
 
   #destroys selected  department
@@ -39,7 +41,7 @@ class Admin::DepartmentsController < ApplicationController
 
 #lists all the department
   def index
-    @department = Department.order('created_at DESC')
+    @department = Department.order('created_at ')
    # render json: {status: 'SUCCESS', message: 'Loaded department',data: @department},status: :ok
   end
 

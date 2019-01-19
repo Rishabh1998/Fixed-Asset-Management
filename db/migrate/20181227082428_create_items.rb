@@ -8,7 +8,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.integer :status
       t.integer :item_code
       t.string :item_code_final
-
+      t.string :current_location
 
       t.timestamps
     end

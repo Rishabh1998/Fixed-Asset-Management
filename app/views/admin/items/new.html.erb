@@ -1,0 +1,28 @@
+
+
+<div class ="container">
+          <%= form_for :item, url:admin_items_path do |f| %>
+            <%= f.label 'Department_id' %>
+            <%= f.text_field :department_id %>
+
+            <%= f.label 'Category_id' %>
+            <%= f.text_field :category_id %>
+
+            <%= f.label 'Name' %>
+            <%= f.text_field :name %>
+
+            <%= f.label 'Description' %>
+            <%= f.text_field :description %>
+
+            <%= f.label 'Status' %>
+            <%= f.text_field :status %>
+
+            <%= f.label 'current location ' %>
+            <%= f.text_field :current_location %>
+
+
+
+            <%= f.submit %>
+
+          <% end %>
+  </div>

@@ -1,15 +1,23 @@
 <div class="container">
 
+  <div class="page-header"><h1>Categories Information</h1></div>
+  <%= link_to "Create Category", new_admin_category_path, remote: true %>
 
-  <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name">
-  <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description">
-  <input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status">
+  <table>
+    <tr>
+      <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
+      <td><input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description"></td>
+      <td><input type="text" id="status" onkeyup="filter()" placeholder="Search for status.." title="Type in a status"></td>
+    </tr>
+  </table>
+
 
   <table class="table table-striped" id="Table">
     <thead><th>Name</th><th>Description</th><th>Status</th><th>Department Name</th></thead>
+
+
  <% @categories.each do |category| %>
   <tr>
-
     <td><%= category.name %></td>
     <td><%= category.description  %></td>
     <td><%= category.status %></td>
@@ -17,6 +25,7 @@
   </tr>
     <%end %>
   <tr></tr>
+
 
 </table>
 </div>

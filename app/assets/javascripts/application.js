@@ -16,3 +16,13 @@
 //= require_tree .
 //= require bootstrap
 //= require filter.js
+
+
+//= require turbolinks
+
+//= require bootstrap
+
+//= require_tree.
+
+//= require popper
+

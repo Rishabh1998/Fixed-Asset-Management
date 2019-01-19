@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  root 'admin/departments#index'
+  root'admin/departments#index'
   get 'sign_up' => 'admin/departments#sign_up'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   namespace :admin do
+    get "departments/new_release" => 'project#new_release', :as => :new_release
 
     resources :departments do
       collection do
