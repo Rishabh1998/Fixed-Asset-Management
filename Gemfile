@@ -7,7 +7,7 @@ ruby '2.3.3'
 gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
 gem 'popper_js'
-gem 'barby', require: %w(barby barby/barcode/code_128 barby/outputter/png_outputter)
+gem 'barby'
 gem 'chunky_png'
 gem 'rdoc'
 # Use Puma as the app server
