@@ -24,11 +24,11 @@
           </div>
 
           <div class="form-group">
-            <%= f.label 'Status' %>
-            <%= f.text_field :status, :class => 'form-control' %>
+            <%= f.label 'Status' %><br>
+            <%= f.select(:status,["Active","Disabled"] , :class => 'form-control') %>
           </div>
 
-          <%= f.submit %>
+          <%= f.submit :class => "btn btn-default" %>
 
         <% end %>
 

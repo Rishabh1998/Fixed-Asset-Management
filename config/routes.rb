@@ -10,14 +10,12 @@ Rails.application.routes.draw do
       collection do
         get :existing_department
         get :filter
-
       end
     end
 
     resources :items do
       collection do
         get :existing_item
-        put :location
         get :barcode
       end
     end

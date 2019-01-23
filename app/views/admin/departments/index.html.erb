@@ -3,17 +3,14 @@
   <div class="page-header"><h1>Departments Information</h1></div>
  <%= link_to "Create New Department", new_admin_department_path,class: "btn btn-default", remote: true %>
   <br><br>
-  <table>
-    <tr>
-      <td> <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name"> </td>
-      <td><input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description"></td>
-      <td><select id="status" onchange="filter()" name="status">
+  <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." class = "filters">
+      <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." class = "filters">
+      <select id="status" onchange="filter()" name="status">
         <option value="">Select Status</option>
         <option value="active">Active</option>
         <option value="disabled">Disabled</option>
-      </select></td>
-      </tr>
-  </table>
+      </select>
+
 
 
 

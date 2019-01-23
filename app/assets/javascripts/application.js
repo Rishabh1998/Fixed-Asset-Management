@@ -16,7 +16,7 @@
 //= require_tree .
 //= require bootstrap
 //= require filter.js
-
+//= require item.js.coffee
 
 //= require turbolinks
 

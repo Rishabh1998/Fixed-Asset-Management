@@ -32,6 +32,7 @@ def new
     @barcode = Barby::GS1128.new(item,'a','1')
     @barcode_pdf= Barby::PrawnOutputter.new(@barcode)
     doc =  @barcode_pdf.to_pdf
+
     respond_to do |format|
       format.html
       format.json
@@ -71,34 +72,18 @@ def new
   end
   def update
     @items = Item.find(params[:id])
-
-    if @items.update_attributes(create_params)
+    old_location = @items.current_location
+    if @items.attributes = create_params
+      if @items.current_location_changed?
+        location_detail = LocationDetail.new(:item_id => @items.id ,:location_history => old_location)
+        location_detail.save
+      end
+      @items.save
       redirect_to action: "index"
     else
-      @subjects = Subject.all
       render :action => 'edit'
     end
   end
-
-  def location
-    item = Item.find(params[:id])
-    old_location = item.current_location
-    item.current_location = params.require(:current_location)
-
-      if item.changed?
-        location_detail = LocationDetail.new(:item_id => item.id ,:location_history => old_location)
-        if location_detail.save
-          if item.update(params.require(:item).permit(:current_location))
-            render json: {status: "success", message: "location and item updated"},status: :ok
-          else
-            render json: {status: "success", message: "location updated"},status: :ok
-          end
-        else
-          render json: {status: "failure", message: "not updated"},status: :ok
-        end
-        end
-    end
-
 
   private
   def create_params

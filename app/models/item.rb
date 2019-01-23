@@ -3,10 +3,12 @@ class Item < ApplicationRecord
   belongs_to :department
   has_many :location_detail, dependent: :destroy
   enum status: [:Disabled,:Active]
+
   def code
     last_code = Item.maximum(:item_code)
     self.item_code = last_code.to_i + 1
   end
+
   def generate_code
     department = Department.find_by(:id => self.department_id).department_code
     category = Category.find_by(:id => self.category_id).category_code

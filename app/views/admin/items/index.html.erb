@@ -3,15 +3,8 @@
   <div class="page-header"><h1>Items Information</h1></div>
   <%= link_to "Create New Item", new_admin_item_path,class: "btn btn-default", remote: true %>
   <br><br>
-  <input type="text" id="name" onkeyup="filter()" placeholder="Search for names.." title="Type in a name">
-  <input type="text" id="description" onkeyup="filter()" placeholder="Search for  description.." title="Type in description">
-  <td><select id="status" onchange="filter()" name="status">
-  <option value="">Select Status</option>
-  <option value="active">Active</option>
-  <option value="disabled">Disabled</option>
-</select></td>
-
-<table class="table table-bordered" id="Table">
+  <%= render 'layouts/filter' %>
+  <table class="table table-bordered" id="Table">
   <thead><th>S.no.</th><th>Name</th><th>Description</th><th>Status</th><th>Current location</th><th>Department Name</th><th>Category Name</th></thead>
 
   <% @items.each do |item| %>
